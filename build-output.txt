@@ -1,0 +1,76 @@
+﻿
+> fastbeauty@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.2.3 (Turbopack)
+
+  Creating an optimized production build ...
+node.exe : Found 1 warning 
+while optimizing generated 
+CSS:
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+    + CategoryInfo         
+     : NotSpecified: (Fou  
+  nd 1 warning... genera   
+ ted CSS::String) [], R    
+emoteException
+    + FullyQualifiedErrorI 
+   d : NativeCommandError
+ 
+
+[2mΓöé   }[22m
+[2mΓöé }[22m
+[2mΓöé[22m @import url('h
+ttps://fonts.googleapis.com
+/css2?family=Inter:wght@300
+;400;500;600;700;800;900&di
+splay=swap');
+[2mΓöå[22m        
+[33m[2m^--[22m @import 
+rules must precede all 
+rules aside from @charset 
+and @layer statements[39m
+[2mΓöå[22m
+[2mΓöé * {[22m
+[2mΓöé   scrollbar-width: 
+thin;[22m
+
+Γ£ô Compiled successfully in 5.0s
+  Running TypeScript ...
+  Finished TypeScript in 3.8s ...
+  Collecting page data using 5 workers ...
+  Generating static pages using 5 workers (0/15) ...
+  Generating static pages using 5 workers (3/15) 
+  Generating static pages using 5 workers (7/15) 
+  Generating static pages using 5 workers (11/15) 
+Γ£ô Generating static pages using 5 workers (15/15) in 332ms
+  Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ ╞Æ /api/stripe/cancel
+Γö£ ╞Æ /api/stripe/checkout
+Γö£ ╞Æ /api/stripe/webhook
+Γö£ Γùï /cadastro
+Γö£ Γùï /dashboard
+Γö£ Γùï /dashboard/clientes
+Γö£ Γùï /dashboard/estoque
+Γö£ Γùï /dashboard/financeiro
+Γö£ Γùï /dashboard/perfil
+Γö£ Γùï /dashboard/servicos
+Γöö Γùï /login
+
+
+╞Æ Proxy (Middleware)
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+
