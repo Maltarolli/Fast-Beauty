@@ -22,8 +22,13 @@ export default function CadastroPage() {
     e.preventDefault();
     setError('');
 
-    if (name.trim().length < 2) {
-      setError('Digite seu nome completo.');
+    const nameParts = name.trim().split(/\s+/);
+    if (nameParts.length < 2) {
+      setError('Digite seu nome e sobrenome.');
+      return;
+    }
+    if (nameParts.length > 2) {
+      setError('Digite apenas seu primeiro e segundo nome.');
       return;
     }
 
@@ -133,7 +138,7 @@ export default function CadastroPage() {
           )}
 
           <Input
-            label="Nome completo"
+            label="Nome e Sobrenome"
             type="text"
             placeholder="Maria Silva"
             value={name}
