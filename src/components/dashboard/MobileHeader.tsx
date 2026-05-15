@@ -1,6 +1,6 @@
 'use client';
 
-import { Sparkles, LogOut } from 'lucide-react';
+import { Sparkles, LogOut, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
@@ -36,12 +36,20 @@ export function MobileHeader({ userName }: MobileHeaderProps) {
           </span>
         </Link>
 
-        <button
-          onClick={handleLogout}
-          className="p-2 rounded-xl text-muted hover:text-error hover:bg-error/5 transition-all cursor-pointer"
-        >
-          <LogOut className="w-5 h-5" />
-        </button>
+        <div className="flex items-center gap-1">
+          <Link
+            href="/dashboard/ajuda"
+            className="p-2 rounded-xl text-muted hover:text-foreground hover-subtle transition-all"
+          >
+            <HelpCircle className="w-5 h-5" />
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="p-2 rounded-xl text-muted hover:text-error hover:bg-error/5 transition-all cursor-pointer"
+          >
+            <LogOut className="w-5 h-5" />
+          </button>
+        </div>
       </div>
     </header>
   );
