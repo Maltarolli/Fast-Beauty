@@ -58,10 +58,10 @@ export default function AgendaPage() {
     setAllTimeBlocks(allBlocks || []);
 
     // Load day-specific data
-    const dayAppts = (allAppts || []).filter(a => a.appointment_date === dateStr);
+    const dayAppts = (allAppts || []).filter((a: Appointment) => a.appointment_date === dateStr);
     setAppointments(dayAppts);
 
-    const dayBlocks = (allBlocks || []).filter(b => b.block_date === dateStr);
+    const dayBlocks = (allBlocks || []).filter((b: TimeBlock) => b.block_date === dateStr);
     setTimeBlocks(dayBlocks);
   }, [currentMonth, dateStr]);
 
