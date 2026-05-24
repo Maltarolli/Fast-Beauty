@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { Modal } from '@/components/ui/Modal';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
@@ -167,6 +168,7 @@ export function NewAppointmentModal({
   timeBlocks,
   onSaved,
 }: NewAppointmentModalProps) {
+  const router = useRouter();
   const [date, setDate] = useState(selectedDate);
   const [time, setTime] = useState('');
   const [clientName, setClientName] = useState('');
@@ -216,6 +218,10 @@ export function NewAppointmentModal({
   });
 
   const handleServiceChange = (id: string) => {
+    if (id === 'new_service') {
+      router.push('/dashboard/servicos');
+      return;
+    }
     setServiceId(id);
     const service = services.find(s => s.id === id);
     if (service) {
@@ -425,6 +431,7 @@ export function NewAppointmentModal({
                 {s.name} — R$ {s.price.toFixed(2)}
               </option>
             ))}
+            <option value="new_service" className="text-accent font-semibold">+ Cadastrar novo serviço</option>
           </select>
         </div>
 

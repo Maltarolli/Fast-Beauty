@@ -17,6 +17,7 @@ interface DayPanelProps {
 
 export function DayPanel({ date, appointments, timeBlocks, onNewAppointment, onBlockTime, onRefresh }: DayPanelProps) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [processingIds, setProcessingIds] = useState<string[]>([]);
   const fullDayBlock = timeBlocks.find(b => b.is_full_day);
 
   const handleDeleteAppointment = async (id: string) => {
@@ -40,36 +41,44 @@ export function DayPanel({ date, appointments, timeBlocks, onNewAppointment, onB
   };
 
   const handleTogglePaid = async (appointment: Appointment) => {
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
+    if (processingIds.includes(appointment.id)) return;
     
-    const newStatus = !appointment.is_paid;
-    await supabase.from('appointments').update({ is_paid: newStatus }).eq('id', appointment.id);
+    setProcessingIds(prev => [...prev, appointment.id]);
 
-    if (newStatus) {
-      // Create transaction
-      await supabase.from('transactions').insert({
-        user_id: user.id,
-        type: 'entrada',
-        title: `${appointment.service_name} - ${appointment.client_name}`,
-        amount: appointment.price,
-        category: 'Serviço',
-        transaction_date: appointment.appointment_date,
-        source: 'agenda',
-        source_id: appointment.id,
-      });
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      
+      const newStatus = !appointment.is_paid;
+      await supabase.from('appointments').update({ is_paid: newStatus }).eq('id', appointment.id);
 
-      // Update client last visit
-      if (appointment.client_id) {
-        await supabase.from('clients').update({ last_visit: appointment.appointment_date }).eq('id', appointment.client_id);
+      if (newStatus) {
+        // Create transaction
+        await supabase.from('transactions').insert({
+          user_id: user.id,
+          type: 'entrada',
+          title: `${appointment.service_name} - ${appointment.client_name}`,
+          amount: appointment.price,
+          category: 'Serviço',
+          transaction_date: appointment.appointment_date,
+          source: 'agenda',
+          source_id: appointment.id,
+        });
+
+        // Update client last visit
+        if (appointment.client_id) {
+          await supabase.from('clients').update({ last_visit: appointment.appointment_date }).eq('id', appointment.client_id);
+        }
+      } else {
+        // Remove transaction
+        await supabase.from('transactions').delete().eq('source', 'agenda').eq('source_id', appointment.id);
       }
-    } else {
-      // Remove transaction
-      await supabase.from('transactions').delete().eq('source', 'agenda').eq('source_id', appointment.id);
-    }
 
-    onRefresh();
+      onRefresh();
+    } finally {
+      setProcessingIds(prev => prev.filter(id => id !== appointment.id));
+    }
   };
 
   // Merge appointments and partial blocks sorted by time
@@ -147,9 +156,10 @@ export function DayPanel({ date, appointments, timeBlocks, onNewAppointment, onB
                     </div>
                     <div className="flex items-center gap-1.5 shrink-0">
                       <button
+                        disabled={processingIds.includes(appt.id)}
                         onClick={() => handleTogglePaid(appt)}
                         className={cn(
-                          'px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer',
+                          'px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed',
                           appt.is_paid
                             ? 'bg-success-bg text-success border border-success/20'
                             : 'bg-subtle text-muted border border-border hover:border-accent/30 hover:text-accent'
