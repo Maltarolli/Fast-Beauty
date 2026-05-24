@@ -1,9 +1,5 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  // Allow Stripe webhook to receive raw body
-  experimental: {
-  },
-};
+const nextConfig: NextConfig = {};
 
 export default nextConfig;
