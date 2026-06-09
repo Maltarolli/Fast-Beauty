@@ -27,7 +27,7 @@ export function Hero() {
         {/* Badge */}
         <div className="animate-fade-in-down inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-glow border border-accent/20 text-accent text-sm font-medium mb-8">
           <span className="animate-bounce-subtle inline-block">✨</span>
-          15 dias de teste totalmente grátis
+          30 dias de teste totalmente grátis
         </div>
 
         {/* Title */}

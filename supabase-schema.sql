@@ -9,7 +9,7 @@ create table public.profiles (
   full_name text not null default '',
   email text not null default '',
   created_at timestamp with time zone default now(),
-  trial_ends_at timestamp with time zone default (now() + interval '15 days'),
+  trial_ends_at timestamp with time zone default (now() + interval '30 days'),
   subscription_status text not null default 'trialing' check (subscription_status in ('active', 'inactive', 'trialing')),
   stripe_customer_id text,
   stripe_subscription_id text

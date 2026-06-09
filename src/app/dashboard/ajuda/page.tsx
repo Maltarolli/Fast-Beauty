@@ -13,7 +13,7 @@ const faqData = [
       },
       {
         q: 'O período de teste é gratuito?',
-        a: 'Sim! Você tem 15 dias gratuitos para testar todas as funcionalidades do FastBeauty sem precisar cadastrar cartão de crédito. Ao final do período, você pode escolher um plano para continuar usando.'
+        a: 'Sim! Você tem 30 dias gratuitos para testar todas as funcionalidades do FastBeauty sem precisar cadastrar cartão de crédito. Ao final do período, você pode escolher um plano para continuar usando.'
       },
       {
         q: 'Posso usar o FastBeauty pelo celular?',

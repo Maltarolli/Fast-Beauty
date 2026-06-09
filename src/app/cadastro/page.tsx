@@ -133,7 +133,7 @@ export default function CadastroPage() {
               Fast<span className="gradient-accent-text">Beauty</span>.
             </span>
           </Link>
-          <p className="text-muted text-sm">Crie sua conta e comece seus 15 dias grátis.</p>
+          <p className="text-muted text-sm">Crie sua conta e comece seus 30 dias grátis.</p>
         </div>
 
         {/* Form */}
