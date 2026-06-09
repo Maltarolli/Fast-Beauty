@@ -17,10 +17,16 @@ export default function CadastroPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    if (!acceptedTerms) {
+      setError('Você precisa aceitar os Termos de Uso para criar sua conta.');
+      return;
+    }
 
     const nameParts = name.trim().split(/\s+/);
     if (nameParts.length < 2) {
@@ -179,6 +185,32 @@ export default function CadastroPage() {
             error={confirmPassword.length > 0 && password !== confirmPassword ? 'As senhas não coincidem' : undefined}
             required
           />
+
+          <label className="flex items-start gap-3 cursor-pointer group select-none py-1">
+            <div className="relative mt-0.5 shrink-0">
+              <input
+                type="checkbox"
+                checked={acceptedTerms}
+                onChange={(e) => setAcceptedTerms(e.target.checked)}
+                className="sr-only peer"
+                required
+              />
+              <div className="w-5 h-5 rounded-md border border-border bg-card peer-checked:bg-accent peer-checked:border-accent transition-all duration-200 flex items-center justify-center">
+                {acceptedTerms && (
+                  <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                )}
+              </div>
+            </div>
+            <span className="text-xs text-muted leading-tight group-hover:text-foreground transition-colors">
+              Li e concordo com os{' '}
+              <Link href="/termos-de-uso" target="_blank" className="text-accent hover:underline font-semibold">
+                Termos de Uso
+              </Link>
+              , declarando estar ciente de que a plataforma está isenta de responsabilidade sobre dados e backups, e que as transações de pagamento são processadas de forma segura e exclusiva pela Stripe.
+            </span>
+          </label>
 
           <Button type="submit" loading={loading} className="w-full" size="lg">
             Criar Minha Conta
