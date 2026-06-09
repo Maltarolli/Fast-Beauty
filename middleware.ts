@@ -47,7 +47,7 @@ export async function middleware(request: NextRequest) {
   // Redirect unauthenticated users away from dashboard
   if (!user && isDashboard) {
     const url = request.nextUrl.clone();
-    url.pathname = '/login';
+    url.pathname = '/';
     return NextResponse.redirect(url);
   }
 
