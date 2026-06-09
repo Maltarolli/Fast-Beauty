@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
     "estética",
     "nail designer",
   ],
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -47,7 +49,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <PWAInstallPrompt />
+        </ThemeProvider>
       </body>
     </html>
   );

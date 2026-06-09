@@ -1,0 +1,23 @@
+{
+  "name": "FastBeauty",
+  "short_name": "FastBeauty",
+  "description": "Gestão Inteligente para Profissionais da Beleza",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f7fc",
+  "theme_color": "#d4598a",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "/manifest.json"
+    }
+  ]
+}
