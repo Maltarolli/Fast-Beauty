@@ -55,6 +55,14 @@ export function cn(...classes: (string | boolean | undefined | null | number)[])
   return classes.filter(Boolean).join(' ');
 }
 
+export function isPasswordStrong(password: string): boolean {
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+  const hasMinLength = password.length >= 6;
+  return hasUpperCase && hasLowerCase && hasNumber && hasMinLength;
+}
+
 // Only re-export what is actually used by other files
 export { format, parseISO, isToday, isSameDay, differenceInDays, addDays, startOfMonth, endOfMonth, subMonths, addMonths, getDay };
 export { ptBR };

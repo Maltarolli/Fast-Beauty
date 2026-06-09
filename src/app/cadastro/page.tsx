@@ -7,6 +7,7 @@ import { Sparkles, Mail, Lock, User, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { createClient } from '@/lib/supabase/client';
+import { isPasswordStrong } from '@/lib/utils';
 
 export default function CadastroPage() {
   const router = useRouter();
@@ -38,8 +39,8 @@ export default function CadastroPage() {
       return;
     }
 
-    if (password.length < 6) {
-      setError('A senha deve ter pelo menos 6 caracteres.');
+    if (!isPasswordStrong(password)) {
+      setError('A senha deve conter pelo menos 6 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula e um número.');
       return;
     }
 
@@ -164,16 +165,21 @@ export default function CadastroPage() {
             required
           />
 
-          <Input
-            label="Senha"
-            type="password"
-            placeholder="Mínimo 6 caracteres"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            icon={<Lock className="w-4 h-4" />}
-            error={password.length > 0 && password.length < 6 ? 'Mínimo 6 caracteres' : undefined}
-            required
-          />
+          <div>
+            <Input
+              label="Senha"
+              type="password"
+              placeholder="Mínimo 6 caracteres (A-Z, a-z, 0-9)"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              icon={<Lock className="w-4 h-4" />}
+              error={password.length > 0 && !isPasswordStrong(password) ? 'Senha fraca: use ao menos 6 caracteres, com maiúscula, minúscula e número' : undefined}
+              required
+            />
+            <p className="text-[11px] text-muted mt-1 px-1">
+              A senha deve conter ao menos 6 caracteres, com letras maiúsculas, minúsculas e números.
+            </p>
+          </div>
 
           <Input
             label="Confirmar Senha"

@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { useTheme } from '@/components/ThemeProvider';
 import type { Profile } from '@/types/database';
+import { isPasswordStrong } from '@/lib/utils';
 
 export default function PerfilPage() {
   const router = useRouter();
@@ -78,8 +79,8 @@ export default function PerfilPage() {
 
       // Update password if provided
       if (newPassword) {
-        if (newPassword.length < 6) {
-          setError('A nova senha deve ter no mínimo 6 caracteres.');
+        if (!isPasswordStrong(newPassword)) {
+          setError('A nova senha deve ter no mínimo 6 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula e um número.');
           setSaving(false);
           return;
         }
@@ -227,14 +228,20 @@ export default function PerfilPage() {
           {passwordVerified && (
             <div className="text-xs text-success animate-fade-in-down">✓ Senha verificada</div>
           )}
-          <Input
-            label="Nova Senha"
-            type="password"
-            placeholder="Mínimo 6 caracteres"
-            value={newPassword}
-            onChange={e => setNewPassword(e.target.value)}
-            disabled={!passwordVerified}
-          />
+          <div>
+            <Input
+              label="Nova Senha"
+              type="password"
+              placeholder="Mínimo 6 caracteres (A-Z, a-z, 0-9)"
+              value={newPassword}
+              onChange={e => setNewPassword(e.target.value)}
+              disabled={!passwordVerified}
+              error={newPassword.length > 0 && !isPasswordStrong(newPassword) ? 'Senha fraca: use ao menos 6 caracteres, com maiúscula, minúscula e número' : undefined}
+            />
+            <p className="text-[11px] text-muted mt-1 px-1">
+              A senha deve conter ao menos 6 caracteres, com letras maiúsculas, minúsculas e números.
+            </p>
+          </div>
           <Input
             label="Confirmar Nova Senha"
             type="password"
