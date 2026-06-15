@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Sparkles, Calendar, Users, Sparkle, DollarSign, Package, User, LogOut, HelpCircle } from 'lucide-react';
+import { Calendar, Users, Sparkle, DollarSign, Package, User, LogOut, HelpCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
@@ -35,7 +35,11 @@ export function Sidebar({ userName }: SidebarProps) {
       {/* Logo */}
       <div className="p-6 pb-4">
         <Link href="/dashboard" className="flex items-center gap-2 group">
-          <Sparkles className="w-6 h-6 text-accent transition-transform duration-300 group-hover:rotate-12" />
+          <img
+            src="/icon.png"
+            alt="FastBeauty Logo"
+            className="w-6 h-6 rounded-lg object-cover transition-transform duration-300 group-hover:rotate-12"
+          />
           <span className="text-xl font-extrabold tracking-tight">
             Fast<span className="gradient-accent-text">Beauty</span>.
           </span>

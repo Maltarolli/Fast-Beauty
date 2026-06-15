@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Sparkles, Mail, Lock, User, CheckCircle2 } from 'lucide-react';
+import { Mail, Lock, User, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { createClient } from '@/lib/supabase/client';
@@ -128,7 +128,11 @@ export default function CadastroPage() {
         {/* Logo */}
         <div className="text-center mb-10">
           <Link href="/" className="inline-flex items-center gap-2 mb-4 group">
-            <Sparkles className="w-8 h-8 text-accent transition-transform duration-300 group-hover:rotate-12" />
+            <img
+              src="/icon.png"
+              alt="FastBeauty Logo"
+              className="w-8 h-8 rounded-xl object-cover transition-transform duration-300 group-hover:rotate-12"
+            />
             <span className="text-3xl font-black tracking-tight">
               Fast<span className="gradient-accent-text">Beauty</span>.
             </span>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Sparkles, LogOut, HelpCircle } from 'lucide-react';
+import { LogOut, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
@@ -30,7 +30,11 @@ export function MobileHeader({ userName }: MobileHeaderProps) {
         </Link>
         
         <Link href="/dashboard" className="flex items-center gap-1.5">
-          <Sparkles className="w-5 h-5 text-accent" />
+          <img
+            src="/icon.png"
+            alt="FastBeauty Logo"
+            className="w-5 h-5 rounded-md object-cover"
+          />
           <span className="text-base font-extrabold">
             Fast<span className="gradient-accent-text">Beauty</span>.
           </span>

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, ArrowLeft, ShieldCheck, CreditCard, CloudLightning, Database } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, CreditCard, CloudLightning, Database } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 export default function TermosDeUsoPage() {
@@ -18,7 +18,11 @@ export default function TermosDeUsoPage() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10 pb-6 border-b border-border">
           <div>
             <Link href="/" className="inline-flex items-center gap-2 mb-3 group">
-              <Sparkles className="w-6 h-6 text-accent transition-transform duration-300 group-hover:rotate-12" />
+              <img
+                src="/icon.png"
+                alt="FastBeauty Logo"
+                className="w-6 h-6 rounded-lg object-cover transition-transform duration-300 group-hover:rotate-12"
+              />
               <span className="text-2xl font-black tracking-tight">
                 Fast<span className="gradient-accent-text">Beauty</span>.
               </span>
